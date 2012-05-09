@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Acrylamid by posativ</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Acrylamid</h1>
+        <p>static blogging in python</p>
+        <p class="view"><a href="https://github.com/posativ/acrylamid">View the Project on GitHub <small>posativ/acrylamid</small></a></p>
+        <ul>
+          <li><a href="https://github.com/posativ/acrylamid/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/posativ/acrylamid/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/posativ/acrylamid">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Acrylamid</h1>
+
+<p>Acrylamid is yet another static blog compiler written in python that
+aims to be lightweight, fast and producing high quality output. It is
+licensed under BSD Style, 2 clauses.</p>
+
+<h2>Why?</h2>
+
+<p>Why another static blog compiler, that's a valid question. So, why would
+you use Acrylamid: It's fast when you start blogging and it stays fast
+when you have hundreds of articles due incremental compilation. It ships
+with all builtin Markdown extensions, custom ones and additional
+reStructuredText directives to embed YouTube or Code. With all
+complexity of Acrylamid itself, it is super easy to use.</p>
+
+<p>Why not Acrylamid? It's not well tested by different people with
+different requirements. It may has some serious issues I didn't noticed
+yet. It also lacks some internal documentation. The default layout is
+indeed not the most beautiful and Acrylamid has no asset handling yet.</p>
+
+<h2>Features</h2>
+
+<p>Acrylamid is a mixture of <a href="http://nanoc.stoneship.org/">nanoc</a>,
+<a href="http://pyblosxom.bluesock.org/">Pyblosxom</a> and
+<a href="http://pelican.notmyidea.org/">Pelican</a>. It features mainly:</p>
+
+<ul>
+<li>  blog articles, static pages, tags, RSS/Atom feeds and an article
+overview</li>
+<li>  theming support (using <a href="http://jinja.pocoo.org/">jinja2</a>) and
+support for jinja2 directly in postings</li>
+<li>  <a href="http://daringfireball.net/projects/markdown/">Markdown</a>,
+<a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>,
+<a href="https://en.wikipedia.org/wiki/Textile_%28markup_language%29">textile</a>
+and <a href="http://johnmacfarlane.net/pandoc/">pandoc</a>
+</li>
+<li>  Markdown extensions and custom reStructuredText directives</li>
+<li>  MathML, modern web-typography and hyphenation using soft-hyphens</li>
+<li>  RSS/Atom/WordPress import, deployment and a handy CLI</li>
+<li>  it's very flexible/configurable and fast</li>
+</ul><h2>Quickstart</h2>
+
+<pre><code>easy_install -U acrylamid
+</code></pre>
+
+<p>It has actually only one dependency, <code>jinja2</code> but for convenience it
+also installs <code>markdown</code> and <code>translitcodec</code>. In addition it has support
+for PyYAML, reStructuredText, syntax highlighting using pygments,
+asciimathml to render MathML and finally smartypants for nicer
+typography.</p>
+
+<pre><code>easy_install -U docutils pygments asciimathml smartypants
+</code></pre>
+
+<p>Get acrylamid, edit <em>conf.py</em> and <em>layouts/</em> and compile with:</p>
+
+<pre><code>$&gt; acrylamid init myblog
+    create  myblog/conf.py
+    ...
+$&gt; cd myblog/
+$&gt; acrylamid compile &amp;&amp; acrylamid view
+      warn  using mtime from &lt;fileentry f'content/sample entry.txt'&gt;
+    create  '/articles/index.html', written to output/articles/index.html
+    create  'Die Verwandlung', written to output/2011/die-verwandlung/index.html
+    create  '/atom/index.html', written to output/atom/index.html
+    create  '/rss/index.html', written to output/rss/index.html
+    create  '/', written to output/index.html
+   * Running on http://127.0.0.1:8000/
+</code></pre>
+
+<h3>Real World Examples?</h3>
+
+<ul>
+<li>  sources from my personal blog:
+<a href="https://github.com/posativ/blog.posativ.org/">/posativ/blog.posativ.org</a>.</li>
+<li>  sebix' (contributer) sources:
+<a href="https://github.com/sebix/sebix.github.com-sources">/sebix/sebix.github.com-sources</a>.</li>
+</ul><h2>Filters</h2>
+
+<p>You can apply various filter to a single entry, to a specific view or
+globally and Acrylamid resolves it automatically (some filters conflict
+with others so you can for example apply <em>Markdown</em> as global filter but
+render some entries with reStructuredText). Currently supported by
+acrylamid, see
+<a href="http://acrylamid.readthedocs.org/en/latest/filters.html">docs/filters.rst</a>
+for detailed information:</p>
+
+<ul>
+<li>  <strong>Markdown</strong>: rendering Markdown (+asciimathml, pygments, built-in
+extensions)</li>
+<li>  <strong>reST</strong>: reStructuredText (+pygments)</li>
+<li>  <strong>pandoc</strong>: Pandoc (+Markdown, textitle, rst, ...)</li>
+<li>  <strong>textile</strong>: using Textile as markup language</li>
+<li>  <strong>HTML</strong>: don't render with filters mentioned above (it's a
+conflicting filter)</li>
+<li>  <strong>typography</strong>:
+<a href="https://code.google.com/p/typogrify">https://code.google.com/p/typogrify</a>/
+(and custom modifications)</li>
+<li>  <strong>hyphenation</strong>: hyphenate words (len &gt; 10) based on language</li>
+<li>  <strong>summarize</strong>: summarizes posts to 200 words</li>
+<li>  <strong>head_offset</strong>: decrease headings by offset</li>
+<li>  <strong>jinja2</strong>: write jinja2 in your entries (you can also execute
+system calls therewith)</li>
+<li>  <strong>acronyms</strong>: automatically replace acronyms and abbreviations to
+help unexperienced users</li>
+</ul><h2>Commands</h2>
+
+<p>See <a href="http://acrylamid.readthedocs.org/en/latest/commands.html">commands</a> for a detailed overview.</p>
+
+<pre><code>%&gt; acrylamid --help
+Usage: acrylamid &lt;subcommand&gt; [options] [args]
+
+Options:
+  -q, --quiet    less verbose
+  -v, --verbose  more verbose
+  -h, --help     show this help message and exit
+  --version      print version details
+
+Commands:
+  init           initializes base structure in DIR
+  create  (new)  creates a new entry
+  compile (co)   compile blog
+  view           fire up built-in webserver
+  autocompile    automatic compilation and serving (short aco)
+  clean   (rm)   remove abandoned files
+  import         import content from URL
+  deploy         run a given TASK
+
+All subcommands except `init` require a conf.py file.
+</code></pre>
+
+<h2>Need Help?</h2>
+
+<p>Join <code>#acrylamid</code> on <a href="http://freenode.net/">Freenode</a>!</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/posativ">posativ</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
